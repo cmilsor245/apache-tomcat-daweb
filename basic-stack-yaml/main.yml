@@ -30,7 +30,7 @@ Resources:
       InstanceType: t2.medium
       KeyName: vockey
       SecurityGroups:
-        - ApplicationServerSecurityGroup
+        - !Ref ApplicationServerSecurityGroup
       BlockDeviceMappings:
         - DeviceName: /dev/sda1
           Ebs:
