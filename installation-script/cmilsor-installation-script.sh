@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# user creation
-useradd -m -d /opt/tomcat -U -s /bin/false tomcat
-
 # machine update
 apt update -y && apt upgrade -y && apt auto-remove -y
+
+# user creation
+useradd -m -d /opt/tomcat -U -s /bin/false tomcat
 
 # java installation
 apt install openjdk-17-jdk -y

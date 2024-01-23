@@ -1,8 +1,6 @@
 # preparación
 
-> se recomienda utilizar el comando `sudo apt update -y && sudo apt upgrade -y && sudo apt auto-remove -y` antes de nada para mantener la máquina actualizada
-
-1. en la máquia desde donde se ejecutarán los scripts, ejecutar el comando `sudo apt install awscli -y`
+1. en la máquina desde donde se ejecutarán los scripts, ejecutar el comando `sudo apt install awscli -y`
 
 2. a continuación, con el comando `git clone https://github.com/cmilsor245/apache-tomcat-daweb.git` se descarga el repositorio, donde están almacenados los scripts y el template del nuevo stack
 

@@ -1,7 +1,5 @@
 # preparación
 
-> se recomienda utilizar el comando ```sudo apt update -y && sudo apt upgrade -y && sudo apt auto-remove -y``` antes de nada para mantener la máquina actualizada
-
 1. ejecutar el comando `git clone https://github.com/cmilsor245/apache-tomcat-daweb.git` para descargar el repositorio, donde se encuentra el script para la instalación automática de apache tomcat
 
 2. ejecutar el comando `sudo chmod +x apache-tomcat-daweb/installation-script/cmilsor-installation-script.sh` para otorgarle permisos de ejecución
