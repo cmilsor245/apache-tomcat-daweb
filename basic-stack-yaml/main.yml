@@ -1,5 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'plantilla básica'
+
+Parameters:
+  EC2InstanceType:
+    Type: String
+    Default: t2.medium
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t2.medium
+      - t2.large
+  EC2InstanceOS:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/canonical/ubuntu/server/20.04/stable/current/amd64/hvm/ebs-gp2/ami-id
+
 Resources:
   ApplicationServerSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -26,8 +40,8 @@ Resources:
   ApplicationServerInstance:
     Type: AWS::EC2::Instance
     Properties:
-      ImageId: ami-06aa3f7caf3a30282
-      InstanceType: t2.medium
+      ImageId: !Ref EC2InstanceOS
+      InstanceType: !Ref EC2InstanceType
       KeyName: vockey
       SecurityGroups:
         - !Ref ApplicationServerSecurityGroup
