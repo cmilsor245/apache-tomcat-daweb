@@ -257,6 +257,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
+
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -283,3 +284,8 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
+
+  ElasticIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref EC2Instance
