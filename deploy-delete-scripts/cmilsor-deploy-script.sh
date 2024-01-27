@@ -13,8 +13,8 @@ STACK_NAME=tomcat
 EC2_INSTANCE_TYPE=t2.medium
 
 aws cloudformation deploy \
---template-file apache-tomcat-daweb/basic-stack-yaml/main.yml \
+--template-file apache-tomcat-daweb/stack-yaml/main.yml \
 --stack-name $STACK_NAME \
 --capabilities CAPABILITY_NAMED_IAM \
 --no-fail-on-empty-changeset \
---parameter-override EC2InstanceType=$EC2_INSTANCE_TYPE
+--parameter-override InstanceType=$EC2_INSTANCE_TYPE

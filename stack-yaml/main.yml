@@ -1,18 +1,19 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Despliegue app Node.j sobre instancia EC2 con ubuntu 20.04
+Description: deploy node.js app on ec2 instance with ubuntu 20.04
+
 Parameters:
   EC2AMI:
-    Description: Imagen del Sistema Operativo
+    Description: os ami
     Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id'
     Default: '/aws/service/canonical/ubuntu/server/20.04/stable/current/amd64/hvm/ebs-gp2/ami-id'
   KeyName:
-    Description: Par clave valor para acceso SSH
+    Description: ssh access key
     Type: AWS::EC2::KeyPair::KeyName
     Default: vockey
   InstanceType:
-    Description: Tamaño instancia EC2
+    Description: storage
     Type: String
-    Default: t2.small
+    Default: t2.medium
     AllowedValues:
     - t1.micro
     - t2.nano
@@ -68,15 +69,16 @@ Parameters:
     - cr1.8xlarge
     - cc2.8xlarge
     - cg1.4xlarge
-    ConstraintDescription: Tipos de instancia validas
+    ConstraintDescription: must be a valid ec2 instance type
   SSHLocation:
-    Description: The IP address range that can be used to SSH to the EC2 instances
+    Description: the ip address range that can be used to ssh to the ec2 instances
     Type: String
     MinLength: '9'
     MaxLength: '18'
     Default: 0.0.0.0/0
     AllowedPattern: "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})"
-    ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
+    ConstraintDescription: must be a valid ip cidr range of the form x.x.x.x/x
+
 Resources:
   EC2Instance:
     Type: AWS::EC2::Instance
@@ -154,11 +156,8 @@ Resources:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
           exec > /tmp/userdata.log 2>&1
-          # Actualizar todas las apps
           apt update -y
-          # Instalar unzip
           apt install unzip
-          # Instalación CodeDeploy Agent
           apt install ruby-full -y
           apt install wget -y
           cd /home/ubuntu
@@ -166,13 +165,14 @@ Resources:
           chmod +x ./install
           ./install auto > /tmp/logfile
           service codedeploy-agent start
-          # Instalar AWS helper scripts de CloudFormation
           mkdir -p /opt/aws/bin
           wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-py3-latest.tar.gz
           python3 -m easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-py3-latest.tar.gz
           ln -s /root/aws-cfn-bootstrap-latest/init/ubuntu/cfn-hup /etc/init.d/cfn-hup
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --configsets full_install --region ${AWS::Region}
           sleep 1
+
+          # ---------------------------------------------------------------------------------------------------
 
           # machine update
           apt update -y && apt upgrade -y && apt auto-remove -y
@@ -251,7 +251,8 @@ Resources:
           # allow incoming traffic on port 8080
           ufw allow 8080
 
-          # Esta tiene que serla ultima instrucción
+          # ---------------------------------------------------------------------------------------------------
+
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
       Tags:
         - Key: Name
@@ -259,7 +260,7 @@ Resources:
   SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Acesso SSH y web en 8080
+      GroupDescription: default security group for ec2
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: 22
@@ -270,6 +271,14 @@ Resources:
         FromPort: 8080
         ToPort: 8080
         CidrIp:
+          Ref: SSHLocation
+      - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          Ref: SSHLocation
+      - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
           Ref: SSHLocation
       Tags:
         - Key: Name
