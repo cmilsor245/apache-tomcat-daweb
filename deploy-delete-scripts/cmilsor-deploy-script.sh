@@ -8,9 +8,9 @@ mkdir -p ~/.aws
 
 cat <<EOL > ~/.aws/credentials
 [default]
-aws_access_key_id=ASIAU3RBYFCARJP2ROBV
-aws_secret_access_key=mIEDms+aWSTRgyxJC6khccgMlYLuryti8TXfKWnp
-aws_session_token=FwoGZXIvYXdzEGMaDCRY3UXYuzG4s1YMHyLCAfPmiU0q2Sf75iBCEJv4qXhrZQ3jgh7hsdq177rQhjKusstEVwu7VLVzBgXqxXR4G9ps9E+vsIn3wuGVZtVHygBh4v0r8Oo2mTnRL1gAM05LT1WzffPP6RMTx3v6uZjHjo6kHDNJnYXJSo/C4f54wx6dPXAXRCSX9LxD6XJRd6K7qvBElRIbXBypXldBOa/h153ZGBsp2rfY0s/OlWmXTkr9YTAwIU1Whgb+wT/ZDn6KE5KgndpT7Idu4ZhQtjGljxwmKIPt5K0GMi1A7oAlUIg2UToa9P4tihgoZv9X5N/F6jrZGfyhJ8AqEDnmV9hobfSRGyuqOQo=
+aws_access_key_id=
+aws_secret_access_key=
+aws_session_token=
 EOL
 
 cat <<EOL > ~/.aws/config
