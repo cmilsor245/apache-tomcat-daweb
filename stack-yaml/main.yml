@@ -274,3 +274,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
+Outputs:
+  InstanceEndpoint:
+    Description: DNS público de la instancia EC2
+    Value: !Sub "http://${EC2InstancePublicDNS}:8080"

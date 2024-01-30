@@ -18,3 +18,9 @@ aws cloudformation deploy \
 --capabilities CAPABILITY_NAMED_IAM \
 --no-fail-on-empty-changeset \
 --parameter-override InstanceType=$EC2_INSTANCE_TYPE
+
+if [ $? -eq 0 ]; then
+  aws cloudformation list-exports \
+  --profile default \
+  --query "Exports[?Name=='InstanceEndpoint'].Value"
+fi
