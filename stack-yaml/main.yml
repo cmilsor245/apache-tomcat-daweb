@@ -277,4 +277,4 @@ Resources:
 Outputs:
   InstanceEndpoint:
     Description: DNS público de la instancia EC2
-    Value: !Sub "http://${EC2InstancePublicDNS}:8080"
+    Value: !Sub "http://${EC2Instance.PublicDnsName}:8080"
