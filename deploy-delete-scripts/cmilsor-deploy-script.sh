@@ -19,11 +19,6 @@ region = us-east-1
 output = json
 EOL
 
-# export AWS_ACCESS_KEY_ID=
-# export AWS_SECRET_ACCESS_KEY=
-# export AWS_SESSION_TOKEN=
-# export AWS_DEFAULT_REGION=us-east-1
-
 STACK_NAME=tomcat
 EC2_INSTANCE_TYPE=t2.medium
 
@@ -35,7 +30,14 @@ aws cloudformation deploy \
 --parameter-override InstanceType=$EC2_INSTANCE_TYPE
 
 if [ $? -eq 0 ]; then
-  aws cloudformation list-exports \
-  --profile default \
-  --query "Exports[?Name=='InstanceEndpoint'].Value"
+  INSTANCE_ENDPOINT=$(aws cloudformation describe-stacks \
+    --stack-name $STACK_NAME \
+    --query "Stacks[0].Outputs[?OutputKey=='InstanceEndpoint'].OutputValue" \
+    --output text)
+
+  if [ -n "$INSTANCE_ENDPOINT" ]; then
+    echo "Instance Endpoint: $INSTANCE_ENDPOINT"
+  else
+    echo "Instance Endpoint not found."
+  fi
 fi
