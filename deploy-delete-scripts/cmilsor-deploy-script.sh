@@ -6,11 +6,12 @@ apt install awscli -y
 
 mkdir -p ~/.aws
 
+# paste your credentials
 cat <<EOL > ~/.aws/credentials
 [default]
-aws_access_key_id=
-aws_secret_access_key=
-aws_session_token=
+aws_access_key_id = 
+aws_secret_access_key = 
+aws_session_token = 
 EOL
 
 cat <<EOL > ~/.aws/config
@@ -36,8 +37,8 @@ if [ $? -eq 0 ]; then
     --output text)
 
   if [ -n "$INSTANCE_ENDPOINT" ]; then
-    echo "Instance Endpoint: $INSTANCE_ENDPOINT"
+    echo "instance endpoint: $INSTANCE_ENDPOINT"
   else
-    echo "Instance Endpoint not found."
+    echo "instance endpoint not found"
   fi
 fi
