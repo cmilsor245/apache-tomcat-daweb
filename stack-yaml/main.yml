@@ -184,6 +184,9 @@ Resources:
           apt install openjdk-17-jdk -y
           apt install default-jdk -y
 
+          # gradle installation
+          apt install gradle -y
+
           # tomcat file download to /tmp
           wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.18/bin/apache-tomcat-10.1.18.tar.gz -P /tmp
 
@@ -250,6 +253,27 @@ Resources:
 
           # allow incoming traffic on port 8080
           ufw allow 8080
+
+          # teacher repo clone
+          git clone https://github.com/DavidHormigoRamirez/springholamundo.git /tmp/springholamundo
+
+          # granting execute permissions to the script
+          sudo chmod +x /tmp/springholamundo/gradlew
+
+          # running the script
+          cd /tmp/springholamundo
+          ./gradlew build
+          ./gradlew war
+
+          # moving war file to tomcat webapps
+          mv /tmp/springholamundo/build/libs/holamundo-0.0.1-SNAPSHOT.war /opt/tomcat/webapps/holamundo.war
+
+          # restart tomcat
+          /opt/tomcat/bin/startup.sh
+          /opt/tomcat/bin/shutdown.sh
+          /opt/tomcat/bin/startup.sh
+
+          cd
 
           # Esta tiene que serla ultima instrucción
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}

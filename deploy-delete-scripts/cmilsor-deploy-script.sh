@@ -37,8 +37,10 @@ if [ $? -eq 0 ]; then
     --output text)
 
   if [ -n "$INSTANCE_ENDPOINT" ]; then
-    echo "instance endpoint: $INSTANCE_ENDPOINT"
+    clear
+    echo "holamundo app url: $INSTANCE_ENDPOINT/holamundo/hola"
   else
+    clear
     echo "instance endpoint not found"
   fi
 fi
