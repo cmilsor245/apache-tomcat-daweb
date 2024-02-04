@@ -273,8 +273,6 @@ Resources:
           # /opt/tomcat/bin/shutdown.sh
           # /opt/tomcat/bin/startup.sh
 
-          cd
-
           # Esta tiene que serla ultima instrucción
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
       Tags:
