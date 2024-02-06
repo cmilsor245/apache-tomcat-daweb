@@ -11,7 +11,7 @@
 # ejecución
 
 ## cmilsor-deploy-script.sh
-`sudo ./apache-tomcat-daweb/deploy-delete-scripts/cmilsor-deploy-script.sh`
+`sudo /tmp/apache-tomcat-daweb/deploy-delete-scripts/cmilsor-deploy-script.sh`
 
 ## cmilsor-delete-script.sh
-`sudo ./apache-tomcat-daweb/deploy-delete-scripts/cmilsor-delete-script.sh`
+`sudo /tmp/apache-tomcat-daweb/deploy-delete-scripts/cmilsor-delete-script.sh`
