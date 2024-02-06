@@ -251,6 +251,9 @@ Resources:
           # allow incoming traffic on port 8080
           ufw allow 8080
 
+          # -----------------------------------------------------------------------------------------
+          
+          # springholamundo - instalación de la primera aplicación - la segunda se hace mediante codedeploy en aws
           # gradle installation
           apt install gradle -y
 
