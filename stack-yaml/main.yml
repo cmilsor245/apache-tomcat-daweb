@@ -307,6 +307,19 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
+  CodeDeployDeploymentGroup:
+    Type: AWS::CodeDeploy::DeploymentGroup
+    Properties:
+      ApplicationName: !Ref CodeDeployApplication
+      DeploymentGroupName: tomcat-group
+      ServiceRoleArn: "arn:aws:iam::334004496513:role/LabRole"
+      DeploymentStyle:
+        DeploymentType: IN_PLACE
+      Ec2TagFilters:
+        - Key: Name
+          Value: tomcat
+          Type: KEY_AND_VALUE
+      DeploymentConfigName: CodeDeployDefault.OneAtATime
 Outputs:
   InstanceEndpoint:
     Description: DNS público de la instancia EC2
