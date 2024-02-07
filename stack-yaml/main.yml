@@ -299,6 +299,14 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref AWS::StackName
+  CodeDeployApplication:
+    Type: AWS::CodeDeploy::Application
+    Properties:
+      ApplicationName: !Ref AWS::StackName
+      ComputePlatform: Server
+      Tags:
+        - Key: Name
+          Value: !Ref AWS::StackName
 Outputs:
   InstanceEndpoint:
     Description: DNS público de la instancia EC2
