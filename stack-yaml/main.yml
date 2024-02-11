@@ -315,7 +315,7 @@ Resources:
       ServiceRoleArn: "arn:aws:iam::334004496513:role/LabRole"
       DeploymentStyle:
         DeploymentType: IN_PLACE
-        DeploymentOption: WITH_TRAFFIC_CONTROL
+        DeploymentOption: WITHOUT_TRAFFIC_CONTROL
       Ec2TagFilters:
         - Key: Name
           Value: tomcat
